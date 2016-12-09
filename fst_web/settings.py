@@ -4,7 +4,7 @@ import os
 """
 General Django settings for FST webservice
 """
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.abspath(os.path.dirname(__file__))
 make_root_path = lambda *args: os.path.join(ROOT, *args)
 
@@ -51,7 +51,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'uploads')
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # NOTE! In Django 1.4 this replaces "ADMIN_MEDIA_PREFIX"
 # URL prefix for admin static files -- CSS, JavaScript and images.
@@ -77,6 +77,7 @@ STATICFILES_FINDERS = (
 SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
@@ -98,7 +99,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    # 'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
