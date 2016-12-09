@@ -15,7 +15,7 @@ DEBUG = True
 
 # NOTE! Before deploying on a public, uncomment ALLOWED_HOSTS
 # and add IP address and/or domain of your site
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1', xxx.xx.xx.xxx]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fst.magokoro.nu']
 
 # Look for instance-specific settings
 try:
