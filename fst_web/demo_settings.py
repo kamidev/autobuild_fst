@@ -12,13 +12,16 @@ your particular installation.
 
 # NOTE! Always set this to False before deploying
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+
+# NOTE! Before deploying on a public, uncomment ALLOWED_HOSTS
+# and add IP address and/or domain of your site
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', xxx.xx.xx.xxx]
 
 # Look for instance-specific settings
 try:
-    from instance_settings import *
+    from .instance_settings import *
 except ImportError:
-    from default_instance_settings import *
+    from .default_instance_settings import *
 
 DATABASES = {
     'default': {
@@ -29,8 +32,8 @@ DATABASES = {
 
 LOG_LEVEL = "DEBUG"
 
-#Enable this to override global DB Debug setting
-#DB_DEBUG_LEVEL = "DEBUG"
+# Enable this to override global DB Debug setting
+# DB_DEBUG_LEVEL = "DEBUG"
 
 # Setup mail server for sending email notifications.
 # You can use any mail server you want.
@@ -38,31 +41,24 @@ LOG_LEVEL = "DEBUG"
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'your email'
-#EMAIL_HOST_PASSWORD = 'your password'
+# EMAIL_HOST_USER = 'your email'
+# EMAIL_HOST_PASSWORD = 'your password'
 
 # Admins specified here receive email notifications on critical errors.
-# By default, this is the FST sysadmin at Domstolsverket.
-# Feel free to add more names if you want your local sysadmin to
-# receive the same notifications.
-ADMINS = (
-# ('Sysadmin at FST', 'sysadmin@fst.lagrummet.se',
-# ('Sysadmin at your agency', 'sysadmin@your_agency.se',
-#),
-)
+ADMINS = ()
 
 MANAGERS = ADMINS
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = os.path.join("/", FST_INSTANCE_PREFIX,
-                         "dokument/")
+MEDIA_URL = os.path.join("/dokument/")
 
 # Site and port for hosting FST service (do not add ending '/').
 FST_SITE_URL = "http://127.0.0.1:8000"
 
-
+# TODO - Check if FST_INSTANCE_PREFIX can be removed
 # Site and port of specific FST instance (do not add ending '/').
-FST_INSTANCE_URL = os.path.join("http://127.0.0.1:8000",
-                               FST_INSTANCE_PREFIX)
+FST_INSTANCE_URL = os.path.join(
+    "http://127.0.0.1:8000",
+    FST_INSTANCE_PREFIX)
